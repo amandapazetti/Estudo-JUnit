@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class BonusServiceTest {
@@ -14,16 +15,18 @@ public class BonusServiceTest {
          void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoAlto() {
              //Estanciando e criando um novo objeto
              BonusService service = new BonusService();
-             /* criando um varialvel e atribuindo valores atraves de um metodo já criado que irá
-             receber como argumento um objeto classe e dentro desse objeto será atribuido valores para os atributos.
+
+             /*O objetivo do teste abaixo é verificar se o método
+              calcularBonus() do service lança uma exceção do
+               tipo IllegalArgumentException quando um
+               funcionário com salário anual superior a um
+               determinado limite tenta receber um bônus.
+               Se a exceção for lançada corretamente, o teste passa.
+                Caso contrário, ele falha e indica que o comportamento
+                 do método não está de acordo com o esperado
               */
-             BigDecimal bonus = service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal("25000")));
-
-            /* O método abaixo compara dois valores e verifica se eles são iguais,
-             lançando uma exceção se eles não forem iguais.
-             */
-
-             assertEquals(new BigDecimal("0.00"), bonus);
+             assertThrows(IllegalArgumentException.class,
+                     () -> service.calcularBonus(new Funcionario("Rodrigo", LocalDate.now(), new BigDecimal("25000"))));
          }
 
     @Test
