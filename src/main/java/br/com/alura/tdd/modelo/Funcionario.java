@@ -34,21 +34,13 @@ public class Funcionario {
 		return salario;
 	}
 
-/*Método de reajuste de salário: por fim, é definido um
-método público "reajustarSalario()" que recebe como
-parâmetro um BigDecimal chamado "reajuste". Esse
-método atualiza o salário do funcionário adicionando
-o valor do parâmetro "reajuste" ao salário atual e
-arredondando o resultado para duas casas decimais
-com o modo HALF_UP.
-O método "setScale(2, RoundingMode.HALF_UP)" define
-o número de casas decimais e o modo de arredondamento
-para duas casas decimais com arredondamento para
-cima. O método "add()" é usado para somar o valor
-do parâmetro "reajuste" ao salário atual.
-O resultado é então atribuído ao atributo "salario"
-da classe.*/
+
 	public void reajustarSalario(BigDecimal reajuste) {
-		this.salario = this.salario.add(reajuste).setScale(2, RoundingMode.HALF_UP);
+		this.salario = this.salario.add(reajuste);
+		arredondarSalario();
 	}
+	private void arredondarSalario() {
+		this.salario = this.salario.setScale(2, RoundingMode.HALF_UP);
+	}
+
 }
